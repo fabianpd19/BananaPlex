@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible"="IE=edge">
-    <title>Banana Plex - Solicitudes</title>
+    <title>Banana Plex - Compra/Venta</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -47,10 +47,10 @@
                         </li>
                     </ul>
                 </li> -->
-                <li> <a href="index.html">Principal</a> </li>
+                <li> <a href="index.php">Principal</a> </li>
                 <li> <a href="empleados.php">Empleados</a> </li>
                 <li> <a href="clientes.php">Clientes</a> </li>
-                <li> <a href="solicitud.php">Solicitudes</a> </li>
+                <li> <a href="solicitud.php">Compra/Venta</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
                 <li> <a href="productos.php">Productos</a></li>
 

@@ -15,4 +15,3 @@ function obtenerEmpleados($pdo)
         die("Error en la consulta: " . $e->getMessage());
     }
 }
-?>

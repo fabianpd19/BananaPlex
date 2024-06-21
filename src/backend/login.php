@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['nombre'] = $usuario['nombre'];
 
         // Redirigir a la página de bienvenida
-        header("Location: ../index.html");
+        header("Location: ../index.php");
     } else {
         // Error de autenticación
         header("Location: ../login.html");

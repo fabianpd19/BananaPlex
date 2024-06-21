@@ -48,10 +48,10 @@ $precio = htmlspecialchars($producto['precio']);
                 <h3>Banana Plex</h3>
             </div>
             <ul class="list-unstyled components">
-                <li> <a href="index.html">Principal</a> </li>
+                <li> <a href="index.php">Principal</a> </li>
                 <li> <a href="empleados.php">Empleados</a> </li>
                 <li> <a href="clientes.php">Clientes</a> </li>
-                <li> <a href="solicitud.php">Solicitudes</a> </li>
+                <li> <a href="solicitud.php">Compra/Venta</a> </li>
                 <li> <a href="productos.php">Productos</a> </li>
                 <li> <a href="productos.php">Productos</a></li>
             </ul>

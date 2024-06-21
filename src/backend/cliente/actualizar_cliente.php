@@ -3,10 +3,10 @@ require_once '../config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
-    $nombre1 = $_POST['nombre1'];
-    $nombre2 = $_POST['nombre2'];
-    $apellido1 = $_POST['apellido1'];
-    $apellido2 = $_POST['apellido2'];
+    $nombre1 = strtoupper($_POST['nombre1']);
+    $nombre2 = strtoupper($_POST['nombre2']);
+    $apellido1 = strtoupper($_POST['apellido1']);
+    $apellido2 = strtoupper($_POST['apellido2']);
     $direccion = $_POST['direccion'];
     $telefono = $_POST['telefono'];
     $empresa = $_POST['empresa'];

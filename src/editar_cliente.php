@@ -38,7 +38,7 @@ $empresas = obtenerEmpresas($pdo);
 $provincias = obtenerProvincias($pdo);
 
 // Definir valores iniciales para evitar errores de índice no definido
-$nombre = htmlspecialchars($cliente['nombre']);
+$nombre = htmlspecialchars($cliente['nombre1']);
 $direccion = htmlspecialchars($cliente['direccion']);
 $telefono = htmlspecialchars($cliente['telefono']);
 $correo_electronico = isset($_POST['correo_electronico']) ? $_POST['correo_electronico'] : '';
@@ -96,13 +96,12 @@ $provincia_id = $cliente['provincia_id'];
                         </li>
                     </ul>
                 </li> -->
-                <li> <a href="index.html">Principal</a> </li>
+                <li> <a href="index.php">Principal</a> </li>
                 <li> <a href="empleados.php">Empleados</a> </li>
                 <li> <a href="clientes.php">Clientes</a> </li>
-                <li> <a href="solicitud.php">Solicitudes</a> </li>
+                <li> <a href="solicitud.php">Compra/Venta</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
-                <li> <a href="productos.php">Productos</a></li>
-
+            </ul>
             </ul>
 
 

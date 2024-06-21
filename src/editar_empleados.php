@@ -34,6 +34,7 @@ $nombre2 = htmlspecialchars($empleado['nombre2']);
 $apellido1 = htmlspecialchars($empleado['apellido1']);
 $apellido2 = htmlspecialchars($empleado['apellido2']);
 $direccion = htmlspecialchars($empleado['direccion']);
+$cedula = htmlspecialchars($empleado['cedula']);
 $fecha_registro = htmlspecialchars($empleado['fecha_registro']);
 $provincia_id = $empleado['provincia_id'];
 ?>
@@ -73,27 +74,12 @@ $provincia_id = $empleado['provincia_id'];
             </div>
 
             <ul class="list-unstyled components">
-                <!-- <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li> -->
-                <li> <a href="index.html">Principal</a> </li>
+                <li> <a href="index.php">Principal</a> </li>
                 <li> <a href="empleados.php">Empleados</a> </li>
                 <li> <a href="clientes.php">Clientes</a> </li>
-                <li> <a href="solicitud.php">Solicitudes</a> </li>
+                <li> <a href="solicitud.php">Compra/Venta</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
                 <li> <a href="productos.php">Productos</a></li>
-
             </ul>
         </nav>
 
@@ -128,27 +114,27 @@ $provincia_id = $empleado['provincia_id'];
 
                             <div class="col-md-6">
                                 <label for="nombre1" class="form-label">Primer Nombre</label>
-                                <input type="text" class="form-control" id="nombre1" name="nombre1" value="<?php echo $nombre1; ?>" required>
+                                <input type="text" class="form-control" id="nombre1" name="nombre1" pattern="^[^\d]*$" title="El nombre no debe contener números" value="<?php echo $nombre1; ?>" required>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="nombre2" class="form-label">Segundo Nombre</label>
-                                <input type="text" class="form-control" id="nombre2" name="nombre2" value="<?php echo $nombre2; ?>" required>
+                                <input type="text" class="form-control" id="nombre2" name="nombre2" pattern="^[^\d]*$" title="El nombre no debe contener números" value="<?php echo $nombre2; ?>" required>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="apellido1" class="form-label">Primer Apellido</label>
-                                <input type="text" class="form-control" id="apellido1" name="apellido1" value="<?php echo $apellido1; ?>" required>
+                                <input type="text" class="form-control" id="apellido1" name="apellido1" pattern="^[^\d]*$" title="El apellido no debe contener números" value="<?php echo $apellido1; ?>" required>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="apellido2" class="form-label">Segundo Apellido</label>
-                                <input type="text" class="form-control" id="apellido2" name="apellido2" value="<?php echo $apellido2; ?>" required>
+                                <input type="text" class="form-control" id="apellido2" name="apellido2" pattern="^[^\d]*$" title="El apellido no debe contener números" value="<?php echo $apellido2; ?>" required>
                             </div>
 
                             <div class="col-md-12">
                                 <label for="direccion" class="form-label">Cedula</label>
-                                <input type="text" class="form-control" id="cedula" name="cedula" required>
+                                <input type="text" class="form-control" id="cedula" name="cedula" pattern="\d{10}" title="Debe contener exactamente 10 dígitos numéricos" value="<?php echo $cedula; ?>" required>
                             </div>
 
                             <div class="col-md-6">
