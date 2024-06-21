@@ -82,7 +82,6 @@ CREATE TABLE transacciones (
 CREATE TABLE solicitudes (
     id SERIAL PRIMARY KEY,
     cliente_id INT NOT NULL REFERENCES clientes(id) ON DELETE CASCADE,
-    usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     producto_id INT NOT NULL REFERENCES productos(id) ON DELETE CASCADE,
     cantidad INT NOT NULL,
     precio_ofrecido DECIMAL(10, 2) NOT NULL,

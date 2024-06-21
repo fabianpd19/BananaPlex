@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Banana Plex</title>
+    <meta http-equiv="X-UA-Compatible"="IE=edge">
+    <title>Banana Plex - Solicitudes</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -20,7 +19,8 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
-
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -33,28 +33,12 @@
             </div>
 
             <ul class="list-unstyled components">
-                <!-- <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li> -->
                 <li> <a href="index.html">Principal</a> </li>
                 <li> <a href="empleados.php">Empleados</a> </li>
                 <li> <a href="clientes.php">Clientes</a> </li>
                 <li> <a href="solicitud.php">Solicitudes</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
             </ul>
-
-
         </nav>
 
         <!-- Page Content  -->
@@ -67,12 +51,8 @@
                         <i class="fas fa-align-left"></i>
                         <span><i class="fa-solid fa-bars"></i></span>
                     </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <h3 class="my-3" id="titulo">Clientes</h3>
+                        <h3 class="my-3" id="titulo">Solicitudes</h3>
                     </div>
                 </div>
             </nav>
@@ -82,58 +62,76 @@
                 <!-- Begin page content -->
                 <main class="flex-shrink-0">
                     <div class="container">
-                        <form action="backend/solicitud/procesar_solicitud.php" method="POST">
-                            <label for="producto">Producto:</label>
-                            <select id="producto" name="producto">
-                                <!-- Aquí debes generar dinámicamente las opciones de productos -->
-                            </select><br><br>
+                        <h3 class="my-3">Formulario de Solicitud</h3>
 
-                            <label for="cantidad">Cantidad:</label>
-                            <input type="number" id="cantidad" name="cantidad" min="1" required><br><br>
+                        <form id="formularioSolicitud" class="row g-3 mb-4">
+                            <div class="col-md-12">
+                                <label for="cedula" class="form-label">Cédula del Cliente:</label>
+                                <input type="text" id="cedula" name="cedula" class="form-control" required>
+                                <button type="button" id="buscarCliente" class="btn btn-primary mt-2">Buscar</button>
+                            </div>
 
-                            <label for="precio_ofrecido">Precio ofrecido:</label>
-                            <input type="text" id="precio_ofrecido" name="precio_ofrecido" required><br><br>
+                            <div class="col-md-12">
+                                <label for="nombreCliente" class="form-label">Nombre del Cliente:</label>
+                                <input type="text" id="nombreCliente" name="nombreCliente" class="form-control" readonly>
+                            </div>
 
-                            <input type="radio" id="compra" name="tipo" value="compra" required>
-                            <label for="compra">Compra</label>
+                            <div class="col-md-12">
+                                <label for="direccionCliente" class="form-label">Dirección del Cliente:</label>
+                                <input type="text" id="direccionCliente" name="direccionCliente" class="form-control" readonly>
+                            </div>
 
-                            <input type="radio" id="venta" name="tipo" value="venta" required>
-                            <label for="venta">Venta</label><br><br>
+                            <div class="col-md-12">
+                                <label for="telefonoCliente" class="form-label">Teléfono del Cliente:</label>
+                                <input type="text" id="telefonoCliente" name="telefonoCliente" class="form-control" readonly>
+                            </div>
 
-                            <input type="submit" value="Enviar Solicitud">
+                            <div class="col-md-12">
+                                <label for="producto" class="form-label">Producto:</label>
+                                <select id="producto" name="producto_id" class="form-select">
+                                    <!-- Opciones de productos se generarán dinámicamente -->
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="cantidad" class="form-label">Cantidad:</label>
+                                <input type="number" id="cantidad" name="cantidad" class="form-control" min="1" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="precio_ofrecido" class="form-label">Precio ofrecido:</label>
+                                <input type="number" id="precio_ofrecido" name="precio_ofrecido" class="form-control" step="0.01" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label">Tipo:</label><br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="compra" name="tipo" value="compra" required>
+                                    <label class="form-check-label" for="compra">Compra</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="venta" name="tipo" value="venta" required>
+                                    <label class="form-check-label" for="venta">Venta</label>
+                                </div>
+                            </div>
+
+                            <!-- Campos ocultos para almacenar el ID del cliente y del empleado -->
+                            <input type="hidden" id="cliente_id" name="cliente_id">
+                            <input type="hidden" id="empleado_id" name="empleado_id" value="1">
+
+                            <div class="col-12">
+                                <a href="solicitud.php" class="btn btn-secondary">Regresar</a>
+                                <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                            </div>
                         </form>
-
                     </div>
                 </main>
-
-                <div class="modal fade" id="eliminaModal" tabindex="-1" aria-labelledby="eliminaModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="eliminaModalLabel">Aviso</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>¿Desea eliminar este registro?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <form id="form-elimina" action="" method="post">
-                                    <input type="hidden" name="_method" value="delete">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
             </div>
         </div>
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
@@ -152,45 +150,85 @@
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
+
+            cargarProductos();
+
+            $('#buscarCliente').click(function() {
+                buscarCliente();
+            });
+
+            $('#formularioSolicitud').submit(function(e) {
+                e.preventDefault();
+                enviarSolicitud();
+            });
         });
-    </script>
 
-    <script>
-        const eliminaModal = document.getElementById('eliminaModal')
-        if (eliminaModal) {
-            eliminaModal.addEventListener('show.bs.modal', event => {
-                // Button that triggered the modal
-                const button = event.relatedTarget
-                // Extract info from data-bs-* attributes
-                const id = button.getAttribute('data-bs-id')
-
-                // Update the modal's content.
-                const form = eliminaModal.querySelector('#form-elimina')
-                form.setAttribute('action', 'elimina.html?id=' + id)
-            })
+        function cargarProductos() {
+            $.ajax({
+                url: 'backend/productos/buscar_productos.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(productos) {
+                    if (productos.length > 0) {
+                        var options = productos.map(function(producto) {
+                            return '<option value="' + producto.id + '">' + producto.nombre + '</option>';
+                        }).join('');
+                        $('#producto').html(options);
+                    } else {
+                        alert('No se encontraron productos.');
+                    }
+                },
+                error: function() {
+                    alert('Error al cargar los productos.');
+                }
+            });
         }
-    </script>
-    <script>
-        function validateForm() {
-            var nombre = document.getElementById("nombre").value;
-            var telefono = document.getElementById("telefono").value;
-            var nombreRegex = /^[a-zA-Z\s]+$/;
-            var telefonoRegex = /^\d{10}$/;
 
-            if (!nombreRegex.test(nombre)) {
-                alert("El nombre solo debe contener letras.");
-                return false;
+        function buscarCliente() {
+            var cedula = $('#cedula').val().trim();
+            if (cedula === '') {
+                alert('Por favor ingrese la cédula del cliente.');
+                return;
             }
 
-            if (!telefonoRegex.test(telefono)) {
-                alert("El teléfono debe contener solo números y tener 10 dígitos.");
-                return false;
-            }
+            $.ajax({
+                url: 'backend/cliente/buscar_cliente.php',
+                type: 'GET',
+                data: {
+                    cedula: cedula
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.encontrado) {
+                        $('#cliente_id').val(response.id);
+                        $('#nombreCliente').val(response.nombre1 + ' ' + response.nombre2);
+                        $('#direccionCliente').val(response.direccion);
+                        $('#telefonoCliente').val(response.telefono);
+                    } else {
+                        alert('Cliente no encontrado.');
+                    }
+                },
+                error: function() {
+                    alert('Error al buscar el cliente.');
+                }
+            });
+        }
 
-            document.getElementById("nombre").value = nombre.toUpperCase();
-            document.getElementById("direccion").value = document.getElementById("direccion").value.toUpperCase();
+        function enviarSolicitud() {
+            var formData = $('#formularioSolicitud').serialize();
 
-            return true;
+            $.ajax({
+                url: 'backend/solicitud/procesar_solicitud.php',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    alert(response);
+                    $('#formularioSolicitud')[0].reset();
+                },
+                error: function(xhr, status, error) {
+                    alert('Error al enviar la solicitud: ' + xhr.responseText);
+                }
+            });
         }
     </script>
 </body>
