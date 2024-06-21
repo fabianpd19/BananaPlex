@@ -22,11 +22,11 @@ if (!$producto) {
 $nombre = htmlspecialchars($producto['nombre']);
 $descripcion = htmlspecialchars($producto['descripcion']);
 $precio = htmlspecialchars($producto['precio']);
-$stock = htmlspecialchars($producto['stock']);
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,6 +39,7 @@ $stock = htmlspecialchars($producto['stock']);
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 </head>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -52,6 +53,7 @@ $stock = htmlspecialchars($producto['stock']);
                 <li> <a href="clientes.php">Clientes</a> </li>
                 <li> <a href="solicitud.php">Solicitudes</a> </li>
                 <li> <a href="productos.php">Productos</a> </li>
+                <li> <a href="productos.php">Productos</a></li>
             </ul>
         </nav>
 
@@ -83,12 +85,7 @@ $stock = htmlspecialchars($producto['stock']);
 
                         <div class="form-group">
                             <label for="precio">Precio</label>
-                            <input type="text" class="form-control" id="precio" name="precio" value="<?php echo $precio; ?>" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="stock">Stock</label>
-                            <input type="text" class="form-control" id="stock" name="stock" value="<?php echo $stock; ?>" required>
+                            <input type="text" class="form-control" id="precio" name="precio" value="<?php echo $precio; ?>" required pattern="[0-9]+(\.[0-9]+)?" title="Ingrese un número válido (puede incluir decimales)">
                         </div>
 
                         <div class="form-group">
@@ -122,4 +119,5 @@ $stock = htmlspecialchars($producto['stock']);
         });
     </script>
 </body>
+
 </html>

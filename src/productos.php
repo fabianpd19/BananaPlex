@@ -31,6 +31,7 @@
                 <li> <a href="clientes.php">Clientes</a> </li>
                 <li> <a href="solicitud.php">Solicitudes</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
+                <li> <a href="productos.php">Productos</a></li>
             </ul>
         </nav>
 
@@ -59,7 +60,6 @@
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Precio</th>
-                                    <th scope="col">Stock</th>
                                     <th scope="col">Opciones</th>
                                 </tr>
                             </thead>
@@ -79,7 +79,6 @@
                                         echo "<td>" . htmlspecialchars($producto['nombre']) . "</td>";
                                         echo "<td>" . htmlspecialchars($producto['descripcion']) . "</td>";
                                         echo "<td>" . htmlspecialchars($producto['precio']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($producto['stock']) . "</td>";
                                         echo '<td> <a href="editar_productos.php?id=' . htmlspecialchars($producto['id']) . '" class="btn btn-warning btn-sm me-2">Editar</a>';
                                         echo '<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#eliminaModal" data-bs-id="' . htmlspecialchars($producto['id']) . '">Eliminar</button> </td>';
                                         echo "</tr>";

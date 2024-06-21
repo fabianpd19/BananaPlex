@@ -13,4 +13,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error al eliminar producto: " . $e->getMessage());
     }
 }
-?>

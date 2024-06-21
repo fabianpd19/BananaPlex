@@ -67,12 +67,7 @@
 
                             <div class="col-md-6">
                                 <label for="precio" class="form-label">Precio</label>
-                                <input type="text" class="form-control" id="precio" name="precio" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="stock" class="form-label">Cantidad</label>
-                                <input type="number" class="form-control" id="stock" name="stock" required>
+                                <input type="text" class="form-control" id="precio" name="precio" required pattern="[0-9]+(\.[0-9]+)?" title="Ingrese un número válido (puede incluir decimales)">
                             </div>
 
                             <div class="col-12">
@@ -83,26 +78,6 @@
                     </div>
                 </main>
 
-                <div class="modal fade" id="eliminaModal" tabindex="-1" aria-labelledby="eliminaModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="eliminaModalLabel">Aviso</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>¿Desea eliminar este registro?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <form id="form-elimina" action="" method="post">
-                                    <input type="hidden" name="_method" value="delete">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
             </div>

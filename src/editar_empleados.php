@@ -73,11 +73,27 @@ $provincia_id = $empleado['provincia_id'];
             </div>
 
             <ul class="list-unstyled components">
+                <!-- <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li> -->
                 <li> <a href="index.html">Principal</a> </li>
                 <li> <a href="empleados.php">Empleados</a> </li>
                 <li> <a href="clientes.php">Clientes</a> </li>
                 <li> <a href="solicitud.php">Solicitudes</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
+                <li> <a href="productos.php">Productos</a></li>
+
             </ul>
         </nav>
 
@@ -100,7 +116,7 @@ $provincia_id = $empleado['provincia_id'];
                     </div>
                 </div>
             </nav>
-            
+
             <div class="d-flex flex-column h-100">
 
                 <!-- Begin page content -->

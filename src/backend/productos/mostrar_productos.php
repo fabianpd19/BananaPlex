@@ -2,7 +2,7 @@
 // Función para obtener todos los productos
 function obtenerProductos($pdo)
 {
-    $query = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock
+    $query = "SELECT p.id, p.nombre, p.descripcion, p.precio
               FROM productos p";
 
     try {
@@ -13,4 +13,3 @@ function obtenerProductos($pdo)
         die("Error en la consulta: " . $e->getMessage());
     }
 }
-?>

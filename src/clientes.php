@@ -52,7 +52,8 @@
                 <li> <a href="clientes.php">Clientes</a> </li>
                 <li> <a href="solicitud.php">Solicitudes</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
-            </ul>
+                <li> <a href="productos.php">Productos</a></li>
+
             </ul>
 
 

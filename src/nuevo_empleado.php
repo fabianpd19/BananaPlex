@@ -21,11 +21,27 @@
                 <h3>Banana Plex</h3>
             </div>
             <ul class="list-unstyled components">
-                <li><a href="index.html">Principal</a></li>
-                <li><a href="empleados.php">Empleados</a></li>
-                <li><a href="clientes.php">Clientes</a></li>
-                <li><a href="solicitudes.php">Solicitudes</a></li>
-                <li><a href="empresas.php">Empresas</a></li>
+                <!-- <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li> -->
+                <li> <a href="index.html">Principal</a> </li>
+                <li> <a href="empleados.php">Empleados</a> </li>
+                <li> <a href="clientes.php">Clientes</a> </li>
+                <li> <a href="solicitud.php">Solicitudes</a> </li>
+                <li> <a href="empresas.php">Empresas</a> </li>
+                <li> <a href="productos.php">Productos</a></li>
+
             </ul>
         </nav>
 
@@ -48,7 +64,7 @@
             <div class="d-flex flex-column h-100">
                 <main class="flex-shrink-0">
                     <div class="container">
-                        
+
                         <form action="backend/empleados/crear_empleados.php" class="row g-3" method="post" autocomplete="off" onsubmit="return validateForm();">
 
                             <!-- Datos del Usuario -->
