@@ -14,9 +14,10 @@ services:
 
   php:
     build:
-      context: ./php
+      context: .
+      dockerfile: ./php/Dockerfile
     volumes:
-      - ./php/src:/var/www/html
+      - ./src:/var/www/html
     ports:
       - "8080:80"
     depends_on:
