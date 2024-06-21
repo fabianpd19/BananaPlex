@@ -21,8 +21,7 @@ CREATE TABLE productos (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
-    precio DECIMAL(10, 2) NOT NULL,
-    stock INT NOT NULL
+    precio DECIMAL(10, 2) NOT NULL
 );
 
 CREATE TABLE empleados (
@@ -122,10 +121,10 @@ INSERT INTO provincias (nombre) VALUES
     ('Zamora Chinchipe');
 
 -- Insertar datos iniciales en la tabla de productos
-INSERT INTO productos (nombre, descripcion, precio, stock) VALUES
-('Producto A', 'Descripción del Producto A', 10.00, 100),
-('Producto B', 'Descripción del Producto B', 20.00, 50),
-('Producto C', 'Descripción del Producto C', 30.00, 30);
+INSERT INTO productos (nombre, descripcion, precio) VALUES
+('Producto A', 'Descripción del Producto A', 10.00),
+('Producto B', 'Descripción del Producto B', 20.00),
+('Producto C', 'Descripción del Producto C', 30.00);
 
 -- Insertar datos iniciales en la tabla de usuarios
 INSERT INTO usuarios (nombre, correo, contraseña, rol_id) VALUES
@@ -151,11 +150,31 @@ VALUES
 ('Cliente', '1', 'Apellido1', 'Apellido2', 'Dirección de Cliente 1', '123123123', '1111111111', 1, 1),
 ('Cliente', '2', 'Apellido1', 'Apellido2', 'Dirección de Cliente 2', '321321321', '2222222222', 2, 2);
 
-INSERT INTO productos (nombre, descripcion, precio, stock)
-VALUES
-    ('Plátano Verde', 'Plátano en estado verde, ideal para exportación.', 1.50, 100),
-    ('Plátano Maduro', 'Plátano en estado maduro listo para consumo.', 2.00, 150),
-    ('Plátano Orgánico', 'Plátano cultivado orgánicamente, sin pesticidas ni químicos.', 2.50, 80),
-    ('Plátano Baby', 'Plátano pequeño, ideal para mercados específicos.', 1.00, 200),
-    ('Plátano Frito', 'Plátano maduro frito, típico en muchos países.', 3.00, 120);
 
+-- Consultas de ejemplo (pueden ser ejecutadas después de cargar datos)
+
+-- Consulta de clientes con detalles de empresa y provincia
+SELECT c.nombre1, c.nombre2, c.apellido1, c.apellido2, c.direccion, c.telefono, c.fecha_registro, e.nombre AS nombre_empresa, p.nombre AS nombre_provincia
+FROM clientes c
+JOIN empresas e ON c.empresa_id = e.id
+JOIN provincias p ON c.provincia_id = p.id;
+
+-- Consulta para verificar datos insertados en la tabla de clientes
+SELECT * FROM clientes;
+
+select from productos p;
+
+-- Consulta básica para verificar datos insertados en la tabla de usuarios
+SELECT * FROM empleados e ;
+
+-- Insertar productos relacionados con la exportación de plátano
+INSERT INTO productos (nombre, descripcion, precio)
+VALUES
+    ('Plátano Verde', 'Plátano en estado verde, ideal para exportación.', 1.50),
+    ('Plátano Maduro', 'Plátano en estado maduro listo para consumo.', 2.00),
+    ('Plátano Orgánico', 'Plátano cultivado orgánicamente, sin pesticidas ni químicos.', 2.50),
+    ('Plátano Baby', 'Plátano pequeño, ideal para mercados específicos.', 1.00),
+    ('Plátano Frito', 'Plátano maduro frito, típico en muchos países.', 3.00);
+   
+   
+   select * from productos p;
