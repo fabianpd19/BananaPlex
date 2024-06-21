@@ -33,37 +33,18 @@
             </div>
 
             <ul class="list-unstyled components">
-                <!-- <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li> -->
                 <li> <a href="index.html">Principal</a> </li>
                 <li> <a href="empleados.php">Empleados</a> </li>
                 <li> <a href="clientes.php">Clientes</a> </li>
                 <li> <a href="solicitud.php">Solicitudes</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
             </ul>
-            </ul>
-
-
         </nav>
 
         <!-- Page Content  -->
         <div id="content">
-
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span><i class="fa-solid fa-bars"></i></span>
@@ -71,9 +52,8 @@
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
-
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <h3 class="my-3" id="titulo">Clientes</h3>
+                        <h3 class="my-3" id="titulo">Empleados</h3>
                     </div>
                 </div>
             </nav>
@@ -82,16 +62,17 @@
                 <!-- Begin page content -->
                 <main class="flex-shrink-0">
                     <div class="container">
-                        <a href="nuevo_cliente.php" class="btn btn-success">Agregar</a>
+                        <a href="nuevo_empleado.php" class="btn btn-success">Agregar</a>
                         <table class="table table-hover table-bordered my-3" aria-describedby="titulo">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Usuario ID</th>
+                                    <th scope="col">Primer Nombre</th>
+                                    <th scope="col">Segundo Nombre</th>
+                                    <th scope="col">Primer Apellido</th>
+                                    <th scope="col">Segundo Apellido</th>
                                     <th scope="col">Dirección</th>
-                                    <th scope="col">Teléfono</th>
-                                    <th scope="col">Cédula</th>
-                                    <th scope="col">Fecha registro</th>
-                                    <th scope="col">Empresa</th>
+                                    <th scope="col">Fecha de Registro</th>
                                     <th scope="col">Provincia</th>
                                     <th scope="col">Opciones</th>
                                 </tr>
@@ -100,28 +81,25 @@
                                 <?php
                                 // Incluir el archivo de configuración y las consultas
                                 require_once 'backend/config.php';
-                                require_once 'backend/cliente/mostrar_cliente.php';
+                                require_once 'backend/empleados/mostrar_empleados.php';
 
-                                try {
-                                    // Obtener los clientes usando la función obtenerClientes
-                                    $clientes = obtenerClientes($pdo);
+                                // Obtener los empleados usando la función definida en mostrar_empleado.php
+                                $empleados = obtenerEmpleados($pdo);
 
-                                    // Mostrar los clientes en la tabla
-                                    foreach ($clientes as $cliente) {
-                                        echo "<tr>";
-                                        echo "<td>" . htmlspecialchars($cliente['nombre1']) . " " . htmlspecialchars($cliente['nombre2']) . " " . htmlspecialchars($cliente['apellido1']) . " " . htmlspecialchars($cliente['apellido2']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($cliente['direccion']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($cliente['telefono']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($cliente['cedula']) . "</td>"; // Mostrar cédula
-                                        echo "<td>" . htmlspecialchars($cliente['fecha_registro']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($cliente['nombre_empresa']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($cliente['nombre_provincia']) . "</td>";
-                                        echo '<td> <a href="editar_cliente.php?id=' . htmlspecialchars($cliente['id']) . '" class="btn btn-warning btn-sm me-2">Editar</a>';
-                                        echo '<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#eliminaModal" data-bs-id="' . htmlspecialchars($cliente['id']) . '">Eliminar</button> </td>';
-                                        echo "</tr>";
-                                    }
-                                } catch (PDOException $e) {
-                                    die("Error en la consulta: " . $e->getMessage());
+                                // Mostrar los empleados en la tabla
+                                foreach ($empleados as $empleado) {
+                                    echo "<tr>";
+                                    echo "<td>" . htmlspecialchars($empleado['usuario_id']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($empleado['nombre1']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($empleado['nombre2']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($empleado['apellido1']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($empleado['apellido2']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($empleado['direccion']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($empleado['fecha_registro']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($empleado['nombre_provincia']) . "</td>";
+                                    echo '<td> <a href="editar_empleados.php?id=' . htmlspecialchars($empleado['id']) . '" class="btn btn-warning btn-sm me-2">Editar</a>';
+                                    echo '<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#eliminaModal" data-bs-id="' . htmlspecialchars($empleado['id']) . '">Eliminar</button> </td>';
+                                    echo "</tr>";
                                 }
                                 ?>
                             </tbody>
@@ -140,7 +118,7 @@
                                 <p>¿Desea eliminar este registro?</p>
                             </div>
                             <div class="modal-footer">
-                                <form id="form-elimina" action="backend/cliente/eliminar_cliente.php" method="post">
+                                <form id="form-elimina" action="backend/empleados/eliminar_empleados.php" method="post">
                                     <input type="hidden" name="id" id="id-eliminar">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                     <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -152,7 +130,6 @@
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
             </div>
-
         </div>
     </div>
 

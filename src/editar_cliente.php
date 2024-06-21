@@ -3,7 +3,7 @@ require_once 'backend/config.php';
 
 // Verificar si se ha pasado el parámetro ID en la URL
 if (!isset($_GET['id'])) {
-    header("Location: index.php"); // Redirigir si no se proporciona ID
+    header("Location: clientes.php"); // Redirigir si no se proporciona ID
     exit();
 }
 
@@ -96,18 +96,12 @@ $provincia_id = $cliente['provincia_id'];
                         </li>
                     </ul>
                 </li> -->
-                <li>
-                    <a href="index.html">Principal</a>
-                </li>
-                <li>
-                    <a href="empleados.html">Empleados</a>
-                </li>
-                <li>
-                    <a href="clientes.html">Clientes</a>
-                </li>
-                <li>
-                    <a href="solicitudes.html">Solicitudes</a>
-                </li>
+                <li> <a href="index.html">Principal</a> </li>
+                <li> <a href="empleados.php">Empleados</a> </li>
+                <li> <a href="clientes.php">Clientes</a> </li>
+                <li> <a href="solicitud.php">Solicitudes</a> </li>
+                <li> <a href="empresas.php">Empresas</a> </li>
+            </ul>
             </ul>
 
 
@@ -182,7 +176,7 @@ $provincia_id = $cliente['provincia_id'];
                                     </select>
                                 </div>
                                 <div class="col-12 mt-3">
-                                    <a href="index.php" class="btn btn-secondary">Regresar</a>
+                                    <a href="clientes.php" class="btn btn-secondary">Regresar</a>
                                     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                                 </div>
                             </div>

@@ -33,18 +33,11 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li>
-                    <a href="index.html">Principal</a>
-                </li>
-                <li>
-                    <a href="empleados.html">Empleados</a>
-                </li>
-                <li>
-                    <a href="clientes.html">Clientes</a>
-                </li>
-                <li>
-                    <a href="solicitudes.html">Solicitudes</a>
-                </li>
+                <li> <a href="index.html">Principal</a> </li>
+                <li> <a href="empleados.php">Empleados</a> </li>
+                <li> <a href="clientes.php">Clientes</a> </li>
+                <li> <a href="solicitud.php">Solicitudes</a> </li>
+                <li> <a href="empresas.php">Empresas</a> </li>
             </ul>
         </nav>
 
@@ -128,7 +121,7 @@
                                 </select>
                             </div>
                             <div class="col-12">
-                                <a href="index.html" class="btn btn-secondary">Regresar</a>
+                                <a href="clientes.php" class="btn btn-secondary">Regresar</a>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
                         </form>
