@@ -60,6 +60,7 @@ $stats = $query->fetch(PDO::FETCH_ASSOC);
                 <li> <a href="solicitud.php">Compra/Venta</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
                 <li> <a href="productos.php">Productos</a></li>
+                <li> <a href="solicitudes.php">Solicitudes</a></li>
 
             </ul>
         </nav>

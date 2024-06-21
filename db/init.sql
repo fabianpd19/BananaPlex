@@ -121,60 +121,41 @@ INSERT INTO provincias (nombre) VALUES
     ('Zamora Chinchipe');
 
 -- Insertar datos iniciales en la tabla de productos
+-- Insertar datos nuevos en la tabla de productos
 INSERT INTO productos (nombre, descripcion, precio) VALUES
-('Producto A', 'Descripción del Producto A', 10.00),
-('Producto B', 'Descripción del Producto B', 20.00),
-('Producto C', 'Descripción del Producto C', 30.00);
+('PLÁTANO VERDE', 'Plátano en estado verde, ideal para exportación.', 1.50),
+('PLÁTANO MADURO', 'Plátano en estado maduro listo para consumo.', 2.00),
+('PLÁTANO ORGÁNICO', 'Plátano cultivado orgánicamente, sin pesticidas ni químicos.', 2.50),
+('PLÁTANO BABY', 'Plátano pequeño, ideal para mercados específicos.', 1.00),
+('PLÁTANO FRITO', 'Plátano maduro frito, típico en muchos países.', 3.00);
 
--- Insertar datos iniciales en la tabla de usuarios
+-- Insertar datos nuevos en la tabla de usuarios
 INSERT INTO usuarios (nombre, correo, contraseña, rol_id) VALUES
-('test', 'test@test.com', '123', 2),
-('Juan Pérez', 'juan.perez@example.com', 'password123', 1),
-('Ana Gómez', 'ana.gomez@example.com', 'password123', 2),
-('Carlos Ruiz', 'carlos.ruiz@example.com', 'password123', 1),
-('Maria Sanchez', 'maria.sanchez@example.com', 'password123', 2);
+('ADMIN PRINCIPAL', 'admin@example.com', 'adminpass', 2),
+('JUAN PEREZ', 'juan.perez@example.com', 'pass123', 1),
+('ANA GOMEZ', 'ana.gomez@example.com', 'pass123', 2),
+('CARLOS RUIZ', 'carlos.ruiz@example.com', 'pass123', 1),
+('MARIA SANCHEZ', 'maria.sanchez@example.com', 'pass123', 2);
 
+-- Insertar datos nuevos en la tabla de empleados
 INSERT INTO empleados (usuario_id, nombre1, nombre2, apellido1, apellido2, cedula, direccion, provincia_id)
 VALUES
-(2, 'Ana', 'Gómez', 'García', 'López', '3333333333', 'Dirección de Ana Gómez', 1),
-(4, 'Maria', 'Sanchez', 'Perez', 'Ramirez', '4444444444', 'Dirección de Maria Sanchez', 2);
+(3, 'ANA', 'MARIA', 'GOMEZ', 'GARCIA', '0102030405', 'Av. Siempre Viva 123', 1),
+(5, 'MARIA', 'LUISA', 'SANCHEZ', 'RAMIREZ', '0607080910', 'Calle Falsa 456', 2);
 
--- Insertar datos iniciales en la tabla de empresas
+-- Insertar datos nuevos en la tabla de empresas
 INSERT INTO empresas (nombre, direccion, telefono, email) VALUES
-('Empresa X', 'Dirección de Empresa X', '123456789', 'contacto@empresaX.com'),
-('Empresa Y', 'Dirección de Empresa Y', '987654321', 'contacto@empresaY.com');
+('EMPRESA A', 'Av. Tecnología 789', '022345678', 'contacto@empresaA.com'),
+('EMPRESA B', 'Calle Innovación 321', '042345678', 'contacto@empresaB.com');
 
--- Insertar datos iniciales en la tabla de clientes
+-- Insertar datos nuevos en la tabla de clientes
 INSERT INTO clientes (nombre1, nombre2, apellido1, apellido2, direccion, telefono, cedula, empresa_id, provincia_id)
 VALUES
-('Cliente', '1', 'Apellido1', 'Apellido2', 'Dirección de Cliente 1', '123123123', '1111111111', 1, 1),
-('Cliente', '2', 'Apellido1', 'Apellido2', 'Dirección de Cliente 2', '321321321', '2222222222', 2, 2);
-
-
--- Consultas de ejemplo (pueden ser ejecutadas después de cargar datos)
-
--- Consulta de clientes con detalles de empresa y provincia
-SELECT c.nombre1, c.nombre2, c.apellido1, c.apellido2, c.direccion, c.telefono, c.fecha_registro, e.nombre AS nombre_empresa, p.nombre AS nombre_provincia
-FROM clientes c
-JOIN empresas e ON c.empresa_id = e.id
-JOIN provincias p ON c.provincia_id = p.id;
+('LUIS', 'MARTIN', 'PEREZ', 'GOMEZ', 'Calle Principal 123', '0991234567', '1111111111', 1, 1),
+('CARLA', 'VERONICA', 'RAMIREZ', 'LOPEZ', 'Av. Central 456', '0997654321', '2222222222', 2, 2);
 
 -- Consulta para verificar datos insertados en la tabla de clientes
 SELECT * FROM clientes;
 
-select from productos p;
-
--- Consulta básica para verificar datos insertados en la tabla de usuarios
-SELECT * FROM empleados e ;
-
--- Insertar productos relacionados con la exportación de plátano
-INSERT INTO productos (nombre, descripcion, precio)
-VALUES
-    ('Plátano Verde', 'Plátano en estado verde, ideal para exportación.', 1.50),
-    ('Plátano Maduro', 'Plátano en estado maduro listo para consumo.', 2.00),
-    ('Plátano Orgánico', 'Plátano cultivado orgánicamente, sin pesticidas ni químicos.', 2.50),
-    ('Plátano Baby', 'Plátano pequeño, ideal para mercados específicos.', 1.00),
-    ('Plátano Frito', 'Plátano maduro frito, típico en muchos países.', 3.00);
-   
-   
-   select * from productos p;
+-- Consulta para verificar datos insertados en la tabla de empleados
+SELECT * FROM empleados;

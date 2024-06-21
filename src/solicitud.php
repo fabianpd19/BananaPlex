@@ -68,7 +68,7 @@
                         <span><i class="fa-solid fa-bars"></i></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <h3 class="my-3" id="titulo">Solicitudes</h3>
+                        <h3 class="my-3" id="titulo">Compra/Venta</h3>
                     </div>
                 </div>
             </nav>
@@ -78,7 +78,7 @@
                 <!-- Begin page content -->
                 <main class="flex-shrink-0">
                     <div class="container">
-                        <h3 class="my-3">Formulario de Solicitud</h3>
+                        <h3 class="my-3">Formulario de Compra/Venta</h3>
 
                         <form id="formularioSolicitud" class="row g-3 mb-4">
                             <div class="col-md-12">
