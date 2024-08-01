@@ -1,8 +1,13 @@
 <?php
-$host = 'db';
-$dbname = 'BananaPlex';
-$user = 'Grupo3';
-$password = 'gestiongrupo3';
+// $host = 'db';
+// $dbname = 'BananaPlex';
+// $user = 'Grupo3';
+// $password = 'gestiongrupo3';
+
+$host = 'localhost';
+$dbname = 'prueba';
+$user = 'postgres';
+$password = 'espeF19kplm19';
 
 try {
     $pdo = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);

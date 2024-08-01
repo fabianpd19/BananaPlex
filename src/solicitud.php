@@ -50,7 +50,7 @@
                 <li> <a href="index.php">Principal</a> </li>
                 <li> <a href="empleados.php">Empleados</a> </li>
                 <li> <a href="clientes.php">Clientes</a> </li>
-                <li> <a href="solicitud.php">Compra/Venta</a> </li>
+                <li> <a href="solicitudes.php">Compra/Venta</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
                 <li> <a href="productos.php">Productos</a></li>
 
@@ -68,7 +68,7 @@
                         <span><i class="fa-solid fa-bars"></i></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <h3 class="my-3" id="titulo">Compra/Venta</h3>
+                        <h3 class="my-3" id="titulo">Solicitudes</h3>
                     </div>
                 </div>
             </nav>
@@ -78,7 +78,7 @@
                 <!-- Begin page content -->
                 <main class="flex-shrink-0">
                     <div class="container">
-                        <h3 class="my-3">Formulario de Compra/Venta</h3>
+                        <h3 class="my-3">Formulario de Solicitud</h3>
 
                         <form id="formularioSolicitud" class="row g-3 mb-4">
                             <div class="col-md-12">
@@ -136,7 +136,7 @@
                             <input type="hidden" id="empleado_id" name="empleado_id" value="1">
 
                             <div class="col-12">
-                                <a href="solicitud.php" class="btn btn-secondary">Regresar</a>
+                                <a href="solicitudes.php" class="btn btn-secondary">Regresar</a>
                                 <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
                             </div>
                         </form>

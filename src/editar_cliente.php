@@ -99,7 +99,7 @@ $provincia_id = $cliente['provincia_id'];
                 <li> <a href="index.php">Principal</a> </li>
                 <li> <a href="empleados.php">Empleados</a> </li>
                 <li> <a href="clientes.php">Clientes</a> </li>
-                <li> <a href="solicitud.php">Compra/Venta</a> </li>
+                <li> <a href="solicitudes.php">Compra/Venta</a> </li>
                 <li> <a href="empresas.php">Empresas</a> </li>
             </ul>
             </ul>

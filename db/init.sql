@@ -154,8 +154,3 @@ VALUES
 ('LUIS', 'MARTIN', 'PEREZ', 'GOMEZ', 'Calle Principal 123', '0991234567', '1111111111', 1, 1),
 ('CARLA', 'VERONICA', 'RAMIREZ', 'LOPEZ', 'Av. Central 456', '0997654321', '2222222222', 2, 2);
 
--- Consulta para verificar datos insertados en la tabla de clientes
-SELECT * FROM clientes;
-
--- Consulta para verificar datos insertados en la tabla de empleados
-SELECT * FROM empleados;
