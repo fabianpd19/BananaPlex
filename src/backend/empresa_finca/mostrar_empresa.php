@@ -2,8 +2,7 @@
 // Función para obtener todas las empresas con información extendida
 function obtenerEmpresas($pdo)
 {
-    $query = "SELECT e.id, e.nombre AS nombre_empresa, e.direccion, e.telefono, e.email
-              FROM empresas e";
+    $query = "SELECT * FROM obtener_empresas_info();";
 
     try {
         $stmt = $pdo->query($query);
@@ -13,4 +12,3 @@ function obtenerEmpresas($pdo)
         die("Error en la consulta: " . $e->getMessage());
     }
 }
-?>

@@ -53,6 +53,7 @@
                 <!-- Begin page content -->
                 <main class="flex-shrink-0">
                     <div class="container">
+                        <a href="solicitud.php" class="btn btn-success">Agregar</a>
                         <table class="table table-hover table-bordered my-3" aria-describedby="titulo">
                             <thead class="table-dark">
                                 <tr>

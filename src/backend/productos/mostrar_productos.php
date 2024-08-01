@@ -2,8 +2,7 @@
 // Función para obtener todos los productos
 function obtenerProductos($pdo)
 {
-    $query = "SELECT p.id, p.nombre, p.descripcion, p.precio
-              FROM productos p";
+    $query = "SELECT * FROM obtener_productos_info();";
 
     try {
         $stmt = $pdo->query($query);
