@@ -1,9 +1,4 @@
 <?php
-// $host = 'db';
-// $dbname = 'BananaPlex';
-// $user = 'Grupo3';
-// $password = 'gestiongrupo3';
-
 $host = 'db';
 $dbname = 'BananaPlex';
 $user = 'Grupo3';
