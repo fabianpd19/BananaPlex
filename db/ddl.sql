@@ -1,5 +1,4 @@
 -- Crear tablas si no existen
-
 CREATE TABLE IF NOT EXISTS roles (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(20) NOT NULL UNIQUE CHECK (nombre IN ('cliente', 'admin'))
@@ -32,7 +31,7 @@ CREATE TABLE IF NOT EXISTS empleados (
     nombre2 VARCHAR(100),
     apellido1 VARCHAR(100) NOT NULL,
     apellido2 VARCHAR(100) NOT NULL,
-    cedula VARCHAR(20), -- Nuevo campo para número de cédula
+    cedula VARCHAR(20),
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     direccion VARCHAR(200) NOT NULL,
     provincia_id INT REFERENCES provincias(id) ON DELETE SET NULL
@@ -54,7 +53,7 @@ CREATE TABLE IF NOT EXISTS clientes (
     apellido2 VARCHAR(100) NOT NULL,
     direccion VARCHAR(255) NOT NULL,
     telefono VARCHAR(20),
-    cedula VARCHAR(20), -- Nuevo campo para número de cédula
+    cedula VARCHAR(20),
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     empresa_id INT REFERENCES empresas(id) ON DELETE SET NULL,
     provincia_id INT REFERENCES provincias(id) ON DELETE SET NULL
@@ -88,3 +87,117 @@ CREATE TABLE IF NOT EXISTS solicitudes (
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     empleado_id INT REFERENCES empleados(id) ON DELETE SET NULL
 );
+
+-- Vistas Materializadas
+CREATE MATERIALIZED VIEW IF NOT EXISTS vista_empleados AS
+SELECT e.id, e.usuario_id, u.nombre AS nombre_usuario, u.correo, u.rol_id, e.nombre1, e.nombre2, e.apellido1, e.apellido2, e.direccion, e.cedula, e.fecha_registro, p.nombre AS nombre_provincia
+FROM empleados e
+LEFT JOIN usuarios u ON e.usuario_id = u.id
+LEFT JOIN provincias p ON e.provincia_id = p.id;
+
+CREATE OR REPLACE FUNCTION obtener_empleados()
+RETURNS TABLE (
+    id INT,
+    usuario_id INT,
+    nombre_usuario VARCHAR,
+    correo VARCHAR,
+    rol_id INT,
+    nombre1 VARCHAR,
+    nombre2 VARCHAR,
+    apellido1 VARCHAR,
+    apellido2 VARCHAR,
+    direccion VARCHAR,
+    cedula VARCHAR,
+    fecha_registro TIMESTAMP,
+    nombre_provincia VARCHAR
+) AS $$
+BEGIN
+    RETURN QUERY SELECT * FROM vista_empleados;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS clientes_info AS
+SELECT c.id, c.nombre1, c.nombre2, c.apellido1, c.apellido2, c.direccion, c.telefono, c.cedula, c.fecha_registro,
+       e.nombre AS nombre_empresa, p.nombre AS nombre_provincia
+FROM clientes c
+LEFT JOIN empresas e ON c.empresa_id = e.id
+LEFT JOIN provincias p ON p.id = c.provincia_id;
+
+CREATE OR REPLACE FUNCTION obtener_clientes_info()
+RETURNS TABLE (
+    id INT,
+    nombre1 VARCHAR,
+    nombre2 VARCHAR,
+    apellido1 VARCHAR,
+    apellido2 VARCHAR,
+    direccion VARCHAR,
+    telefono VARCHAR,
+    cedula VARCHAR,
+    fecha_registro TIMESTAMP,
+    nombre_empresa VARCHAR,
+    nombre_provincia VARCHAR
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT * FROM clientes_info;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS empresas_info AS
+SELECT e.id, e.nombre AS nombre_empresa, e.direccion, e.telefono, e.email
+FROM empresas e;
+
+CREATE OR REPLACE FUNCTION obtener_empresas_info()
+RETURNS TABLE (
+    id INT,
+    nombre_empresa VARCHAR,
+    direccion VARCHAR,
+    telefono VARCHAR,
+    email VARCHAR
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT * FROM empresas_info;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS productos_info AS
+SELECT p.id, p.nombre, p.descripcion, p.precio
+FROM productos p;
+
+CREATE OR REPLACE FUNCTION obtener_productos_info()
+RETURNS TABLE (
+    id INT,
+    nombre VARCHAR,
+    descripcion TEXT,
+    precio DECIMAL(10, 2)
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT * FROM productos_info;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS solicitudes_pendientes AS
+SELECT s.id, s.cantidad, s.precio_ofrecido, s.tipo,
+       c.nombre1 AS cliente_nombre,
+       p.nombre AS producto_nombre
+FROM solicitudes s
+JOIN clientes c ON s.cliente_id = c.id
+JOIN productos p ON s.producto_id = p.id
+WHERE s.estado = 'pendiente';
+
+CREATE OR REPLACE FUNCTION obtener_solicitudes_pendientes()
+RETURNS TABLE (
+    id INT,
+    cantidad INT,
+    precio_ofrecido DECIMAL(10, 2),
+    tipo VARCHAR,
+    cliente_nombre VARCHAR,
+    producto_nombre VARCHAR
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT * FROM solicitudes_pendientes;
+END;
+$$ LANGUAGE plpgsql;
