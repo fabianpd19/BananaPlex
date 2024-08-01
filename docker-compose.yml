@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: gestiongrupo3
       POSTGRES_DB: BananaPlex
     ports:
-      - "5432:5432"
+      - "5419:5432"
     volumes:
       - ./db:/docker-entrypoint-initdb.d
 
@@ -55,6 +55,21 @@ services:
       - "9187:9187"
     environment:
       DATA_SOURCE_NAME: "postgresql://Grupo3:gestiongrupo3@db:5432/BananaPlex?sslmode=disable"
+    depends_on:
+      - db
+
+  backup:
+    build:
+      context: .
+      dockerfile: Dockerfile.backup
+    environment:
+      PGHOST: db
+      PGDATABASE: BananaPlex
+      PGUSER: Grupo3
+      PGPASSWORD: gestiongrupo3
+    volumes:
+      - ./backups:/backups
+      - ./crontab:/etc/cron.d/backup-cron
     depends_on:
       - db
 
