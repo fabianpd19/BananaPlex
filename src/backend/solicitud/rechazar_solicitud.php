@@ -4,16 +4,38 @@ require_once '../config.php';
 if (isset($_GET['id'])) {
     $solicitud_id = $_GET['id'];
 
-    try {
-        // Actualizar el estado de la solicitud
-        $stmt = $pdo->prepare('
-            UPDATE solicitudes SET estado = \'rechazada\' WHERE id = ?
-        ');
-        $stmt->execute([$solicitud_id]);
-    } catch (PDOException $e) {
-        die("Error al rechazar la solicitud: " . $e->getMessage());
-    }
-}
+    // Iniciar la transacción
+    $pdo->beginTransaction();
 
-header('Location: ../../solicitud.php');
-exit;
+    try {
+        // Rechazar solicitud
+        $query = "SELECT rechazar_solicitud(:id)";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':id', $solicitud_id);
+        $stmt->execute();
+
+        // Confirmar la transacción
+        $pdo->commit();
+        $message = "Solicitud rechazada correctamente.";
+        $message_type = "success";
+    } catch (PDOException $e) {
+        // Revertir la transacción si ocurre un error
+        $pdo->rollBack();
+
+        // Manejar error específico
+        if (strpos($e->getMessage(), 'Solicitud no encontrada o ya procesada') !== false) {
+            $message = "Solicitud no encontrada o ya procesada.";
+        } else {
+            $message = "Error al procesar la solicitud.";
+        }
+        $message_type = "error";
+    }
+} else {
+    $message = "Solicitud no válida.";
+    $message_type = "error";
+}
+?>
+<script>
+    alert("<?php echo addslashes($message); ?>");
+    window.location.href = '../../solicitudes.php'; // Redirigir después de mostrar el mensaje
+</script>

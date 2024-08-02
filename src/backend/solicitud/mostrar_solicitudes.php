@@ -1,10 +1,11 @@
 <?php
-function obtenerSolicitudes($pdo)
+function obtenerSolicitudes($pdo, $estado = '')
 {
-    $query = "SELECT * FROM obtener_solicitudes_pendientes();";
-
+    $query = "SELECT * FROM obtener_solicitudes(:estado);";
     try {
-        $stmt = $pdo->query($query);
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
+        $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     } catch (PDOException $e) {

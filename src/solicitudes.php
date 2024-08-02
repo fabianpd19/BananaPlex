@@ -54,6 +54,25 @@
                 <main class="flex-shrink-0">
                     <div class="container">
                         <a href="solicitud.php" class="btn btn-success">Agregar</a>
+
+                        <!-- Mostrar mensajes de estado -->
+                        <?php
+                        if (isset($_GET['message']) && isset($_GET['type'])) {
+                            $message = htmlspecialchars($_GET['message']);
+                            $type = htmlspecialchars($_GET['type']); // "success" o "error"
+                            echo '<div class="' . $type . '">' . $message . '</div>';
+                        }
+                        ?>
+
+                        <div class="my-3">
+                            <label for="filtroEstado" class="form-label">Filtrar por estado:</label>
+                            <select id="filtroEstado" class="form-control" onchange="filtrarSolicitudes()">
+                                <option value="">Todas</option>
+                                <option value="pendiente">Pendientes</option>
+                                <option value="aprobado">Aceptadas</option>
+                                <option value="rechazado">Rechazadas</option>
+                            </select>
+                        </div>
                         <table class="table table-hover table-bordered my-3" aria-describedby="titulo">
                             <thead class="table-dark">
                                 <tr>
@@ -70,8 +89,10 @@
                                 require_once 'backend/config.php';
                                 require_once 'backend/solicitud/mostrar_solicitudes.php';
 
+                                $estado = isset($_GET['estado']) ? $_GET['estado'] : '';
+
                                 try {
-                                    $solicitudes = obtenerSolicitudes($pdo);
+                                    $solicitudes = obtenerSolicitudes($pdo, $estado);
                                     foreach ($solicitudes as $solicitud) {
                                         echo "<tr>";
                                         echo "<td>" . htmlspecialchars($solicitud['cliente_nombre']) . "</td>";
@@ -79,10 +100,12 @@
                                         echo "<td>" . htmlspecialchars($solicitud['cantidad']) . "</td>";
                                         echo "<td>" . htmlspecialchars($solicitud['precio_ofrecido']) . "</td>";
                                         echo "<td>" . htmlspecialchars($solicitud['tipo']) . "</td>";
-                                        echo '<td>
-                                            <a href="backend/solicitud/aceptar_solicitud.php?id=' . htmlspecialchars($solicitud['id']) . '" class="btn btn-success btn-sm me-2">Aceptar</a>
-                                            <a href="backend/solicitud/rechazar_solicitud.php?id=' . htmlspecialchars($solicitud['id']) . '" class="btn btn-danger btn-sm">Rechazar</a>
-                                          </td>';
+                                        echo '<td>';
+                                        if ($solicitud['estado'] == 'pendiente') {
+                                            echo '<a href="backend/solicitud/aceptar_solicitud.php?id=' . htmlspecialchars($solicitud['id']) . '" class="btn btn-success btn-sm me-2">Aceptar</a>';
+                                            echo '<a href="backend/solicitud/rechazar_solicitud.php?id=' . htmlspecialchars($solicitud['id']) . '" class="btn btn-danger btn-sm">Rechazar</a>';
+                                        }
+                                        echo '</td>';
                                         echo "</tr>";
                                     }
                                 } catch (PDOException $e) {
@@ -118,6 +141,11 @@
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
         });
+
+        function filtrarSolicitudes() {
+            const estado = document.getElementById('filtroEstado').value;
+            window.location.href = `solicitudes.php?estado=${estado}`;
+        }
     </script>
 </body>
 

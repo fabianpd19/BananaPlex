@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Confirmar la transacción
         $pdo->commit();
-        header("Location: ../../index.html");
+        header("Location: ../../index.php");
         exit(); // Asegura que el script se detenga aquí
     } catch (PDOException $e) {
         // Revertir la transacción si ocurre un error
@@ -67,4 +67,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error al crear usuario y empleado: " . $e->getMessage());
     }
 }
-?>

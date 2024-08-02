@@ -4,46 +4,38 @@ require_once '../config.php';
 if (isset($_GET['id'])) {
     $solicitud_id = $_GET['id'];
 
+    // Iniciar la transacción
+    $pdo->beginTransaction();
+
     try {
-        // Iniciar transacción
-        $pdo->beginTransaction();
+        // Aceptar solicitud
+        $query = "SELECT aceptar_solicitud(:id)";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':id', $solicitud_id);
+        $stmt->execute();
 
-        // Obtener la solicitud
-        $stmt = $pdo->prepare('
-            SELECT * FROM solicitudes WHERE id = ?
-        ');
-        $stmt->execute([$solicitud_id]);
-        $solicitud = $stmt->fetch();
-
-        if ($solicitud) {
-            // Insertar en la tabla de transacciones
-            $stmt = $pdo->prepare('
-                INSERT INTO transacciones (cliente_id, producto_id, cantidad, precio_ofrecido, tipo)
-                VALUES (?, ?, ?, ?, ?)
-            ');
-            $stmt->execute([
-                $solicitud['cliente_id'],
-                $solicitud['producto_id'],
-                $solicitud['cantidad'],
-                $solicitud['precio_ofrecido'],
-                $solicitud['tipo']
-            ]);
-
-            // Actualizar el estado de la solicitud
-            $stmt = $pdo->prepare('
-                UPDATE solicitudes SET estado = \'aprobada\' WHERE id = ?
-            ');
-            $stmt->execute([$solicitud_id]);
-
-            // Confirmar transacción
-            $pdo->commit();
-        }
+        // Confirmar la transacción
+        $pdo->commit();
+        $message = "Solicitud aceptada correctamente.";
+        $message_type = "success";
     } catch (PDOException $e) {
-        // Revertir transacción en caso de error
+        // Revertir la transacción si ocurre un error
         $pdo->rollBack();
-        die("Error al aceptar la solicitud: " . $e->getMessage());
-    }
-}
 
-header('Location: ../../solicitud.php');
-exit;
+        // Manejar error específico
+        if (strpos($e->getMessage(), 'Solicitud no encontrada o ya procesada') !== false) {
+            $message = "Solicitud no encontrada o ya procesada.";
+        } else {
+            $message = "Error al procesar la solicitud.";
+        }
+        $message_type = "error";
+    }
+} else {
+    $message = "Solicitud no válida.";
+    $message_type = "error";
+}
+?>
+<script>
+    alert("<?php echo addslashes($message); ?>");
+    window.location.href = '../../solicitudes.php'; // Redirigir después de mostrar el mensaje
+</script>

@@ -29,6 +29,8 @@ $stats = $query->fetch(PDO::FETCH_ASSOC);
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
 </head>
 
 <body>
@@ -88,7 +90,7 @@ $stats = $query->fetch(PDO::FETCH_ASSOC);
                                 <p>Estadísticas de la base de datos.</p>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" id="stats">
                             <div class="col-xl-3 col-sm-6 col-12">
                                 <div class="card">
                                     <div class="card-content">

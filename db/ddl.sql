@@ -201,3 +201,71 @@ BEGIN
     SELECT * FROM solicitudes_pendientes;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Nuevas funciones
+
+CREATE OR REPLACE FUNCTION aceptar_solicitud(solicitud_id INT) RETURNS VOID AS $$
+DECLARE
+    solicitud RECORD;
+    total DECIMAL;
+BEGIN
+    -- Obtener la solicitud
+    SELECT * INTO solicitud FROM solicitudes WHERE id = solicitud_id AND estado = 'pendiente';
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Solicitud no encontrada o ya procesada';
+    END IF;
+
+    -- Calcular el total
+    total := solicitud.cantidad * solicitud.precio_ofrecido;
+
+    -- Insertar en transacciones
+    INSERT INTO transacciones (cliente_id, usuario_id, producto_id, cantidad, total, tipo)
+    VALUES (solicitud.cliente_id, solicitud.empleado_id, solicitud.producto_id, solicitud.cantidad, total, solicitud.tipo);
+
+    -- Actualizar estado de la solicitud
+    UPDATE solicitudes SET estado = 'aprobado' WHERE id = solicitud_id;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION rechazar_solicitud(solicitud_id INT) RETURNS VOID AS $$
+BEGIN
+    -- Actualizar estado de la solicitud
+    UPDATE solicitudes SET estado = 'rechazado' WHERE id = solicitud_id AND estado = 'pendiente';
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Solicitud no encontrada o ya procesada';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Función para obtener solicitudes con filtrado por estado
+CREATE OR REPLACE FUNCTION obtener_solicitudes(estado_param TEXT)
+RETURNS TABLE (
+    id INT,
+    cliente_nombre VARCHAR,
+    producto_nombre VARCHAR,
+    cantidad INT,
+    precio_ofrecido DECIMAL(10, 2),
+    tipo VARCHAR,
+    estado VARCHAR
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        s.id,
+        CAST(c.nombre1 || ' ' || COALESCE(c.nombre2, '') || ' ' || c.apellido1 || ' ' || c.apellido2 AS VARCHAR) AS cliente_nombre,
+        p.nombre AS producto_nombre,
+        s.cantidad,
+        s.precio_ofrecido,
+        s.tipo,
+        s.estado
+    FROM solicitudes s
+    JOIN clientes c ON s.cliente_id = c.id
+    JOIN productos p ON s.producto_id = p.id
+    WHERE 
+        estado_param IS NULL OR 
+        estado_param = '' OR 
+        s.estado = estado_param;
+END;
+$$ LANGUAGE plpgsql;
